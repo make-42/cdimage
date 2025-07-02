@@ -29,7 +29,7 @@ You could try to guess geometry of an unknown disc and input it manually, but yo
 
 * **mouse scroll wheel** — zoom image.
 
-2. Click Edit→Create track and select the model of your compact disc. 
+2. Click Edit→Create track and select the model of your compact disc.
 
 > If your disc is not in the list (which is likely), you may input geometry manually. However unknown disc calibration is neither easy nor quick procedure. If you still wish to give it a try, I recommend that you read the ["Red Book"](https://www.ecma-international.org/wp-content/uploads/ECMA-130_2nd_edition_june_1996.pdf) as well as  [Considering Calibration](#considering-calibration) section before you start. **If you know the geometry of some compact disc which is not in the list, let me know and I’ll include it into the distribution.**
 
@@ -37,11 +37,11 @@ Depending on your hardware, conversion will take some time. Finally you’ll get
 
 3. You could use any software you like to burn it. For example:
 
-`cdrecord -audio dev=<recorder_device> <generated_track>`
+`cdrecord -sao -audio dev=<recorder_device> <generated_track>`
 
-Remember that you should create an **Audio CD**! 
+Remember that you should create an **Audio CD**!
 
-## Considering Calibration 
+## Considering Calibration
 From the Mathematical point of view we have a sort of [multi-objective optimization](https://en.wikipedia.org/wiki/Multi-objective_optimization) problem. Bicriteria optimization, to be more precise. It means that two objective functions should be optimized simultaneously. If we define goal as getting a "neat image", we need an expert who is able to provide some feedback regarding image "quality". Which leads us to [interactive methods](https://en.wikipedia.org/wiki/Multi-objective_optimization#Solution).
 
 The first and the most obvious idea is to select some series of equally spaced values for each criterium and burn a lot of discs with all possible combinations. If the space is narrow enough, you'll see something at some discs. Then narrow the range and repeat. A typical Computational Mathematics approach. A lot of iterations and time.
@@ -55,6 +55,31 @@ At least for me it was the reason why I finally gave up. However I'd like to sha
 2. I have not considered this option in 2008, but now we have more advanced image recognition algorithms and better cameras. So maybe some AI solution might be used instead of human expertise.
 
 If you have other ideas, please share them.
+
+### A visual method for calibration.
+Here follows a visual method for calibration once a close initial guess has been found (this can be done with [unDEFER]'s defcdparams software or with a preset that yields a close result).
+
+#### Step 1: Burn with an inital guess for the parameters
+Burn your disc with one of the following patterns:
+
+<p align="center">
+    <img src="https://github.com/arduinocelentano/cdimage/blob/main/assets/grad-ref.png" width="200" alt="non alternating lines"/>
+    <img src="https://github.com/arduinocelentano/cdimage/blob/main/assets/grad-ref-alt.png" width="200" alt="alternating lines"/>
+</p>
+
+#### Step 2: Coming up with a refined guess
+Open [this Desmos graph](https://www.desmos.com/calculator/vqbhbt7bkj). You can take a picture of your CD's surface and load it into Desmos and move it around till the concentric lines line up with the purple lines. You don't have to but it makes lining up the simulated lines easier.
+
+Then you set t1 (first track length) and d1 (track delta) to your initial guess, the settings you used to burn your CD.
+
+Then you change the values for t0 (first track length), d0 (track delta) and alpha0 (angle for the start of the line) till the black line overlaps with the line you see on your CD. The black line corresponds to the expected pattern for a disc of actual/real parameters t0 and d0 that is burned with parameters t1 and d1.
+<p align="center">
+    <img src="https://github.com/arduinocelentano/cdimage/blob/main/assets/linedup.png" width="600" alt="screenshot of example usage of the Desmos graph"/>
+</p>
+
+The values for t0 (first track length) and d0 (track delta) you get are a new guess for the geometry parameters.
+
+You should only have to repeat this process 6-7 times to get a satisfying result.
 
 ## Further readings
 
