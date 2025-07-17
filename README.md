@@ -78,6 +78,24 @@ You can either use the solver (see below) or use the graph (see below) once a pr
 #### For more examples of expected distortion patterns
 The `calibration/example-distortion-patterns` folder contains simulated patterns for a tr0 that's 30 too low and correct dtr with actual settings being at (23380.0, 1.3899) and the "burn" settings being (23350.0, 1.3899) for the corresponding reference images in the `calibration/images` folder gives the corresponding patterns with `grad-ref.png` and `grad-ref-out.png` not being simulated as they would yield unreadable simulation results at these errors.
 
+### Trial and error
+If we define t1 as your tr0 guess and t0 the actual tr0 value and d1 your dtr guess and d0 the actual dtr value.
+And e1 and e2 as the errors in the tr0 and dtr guesses respectively such that:
+
+`t1-t0 = e1`
+
+`d1-d0 = e2`
+
+and r as the starting radius of the disc (24.5mm in most cases).
+
+Then at radius a from the center of the disc, you get the same error as if you were to a value for e2 and set e1 to 0 if you set e2 to 0 and
+e1 to `e2*((a/r-1)*t0/d0+1)/2`
+
+The ratio `((a/r-1)*t0/d0+1)/2` is approximately equal to 10000 for most configurations.
+
+This can be useful if you can't tell if the effects are from a dtr error or a tr0 error.
+
+
 ### Using the solver
 The `calibration/solver` directory contains a `solver.py` Python script that can be used to create new tr0 and dtr guesses provided measurements of burnt discs with the different radial lines containing images with a guess for the tr0 and dtr values.
 
