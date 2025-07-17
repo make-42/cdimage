@@ -67,10 +67,14 @@ If the thick line is closer to the inside when compared to the thin line then yo
 
 You can adjust your values by trial and error or you can use the solver (see below), note that with the images `out-alt-lines-coarse.png`, `out-alt-lines-0.png`, `out-alt-lines-1.png`, `out-alt-lines-2.png` and `out-alt-lines-3.png` there are no reference rings at 4mm intervals (for clarity reasons) such as with `grad-ref.png` and `grad-ref-out.png` so only use those images initially since you actually have to measure distances from the center of the disc for the ring positions the solver expects (28.5 mm for ring 1, 40.5 mm for ring 4 and 56.5 mm for ring 8) then use `grad-ref.png` (or `grad-ref-out.png` although it isn't as clear as `grad-ref.png` to read) once you can clearly make out the radial lines.
 
+Slowly move up through images `out-alt-lines-coarse.png`, `out-alt-lines-0.png`, `out-alt-lines-1.png`, `out-alt-lines-2.png` and `out-alt-lines-3.png` then `grad-ref.png` (or `grad-ref-out.png`) as the winding gets less and less intense.
+
+You can either use the solver (see below) or use the graph (see below) once a pretty good initial guess has been made (one or two windings across the whole disc surface) until your values converge.
+
 #### For more examples of expected distortion patterns
 The `calibration/example-distortion-patterns` folder contains simulated patterns for a tr0 that's 30 too low and correct dtr with actual settings being at (23380.0, 1.3899) and the "burn" settings being (23350.0, 1.3899) for the corresponding reference images in the `calibration/images` folder gives the corresponding patterns with `grad-ref.png` and `grad-ref-out.png` not being simulated as they would yield unreadable simulation results at these errors.
 
-#### Using the solver
+### Using the solver
 The `calibration/solver` directory contains a `solver.py` Python script that can be used to create new tr0 and dtr guesses provided measurements of burnt discs with the different radial lines containing images with a guess for the tr0 and dtr values.
 
 If you burnt an image with radial lines but no reference rings at 4mm intervals you can measure the distance from the center of the disc and see where the winding lines intersect those distances (28.5 mm for ring 1, 40.5 mm for ring 4 and 56.5 mm for ring 8).
