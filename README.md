@@ -80,8 +80,8 @@ Set these different variables in the solver script with your own values:
 t1 = 23000.0 # tr0 guess (the one used to burn your disc)
 d1 = 1.385459 # dtr guess (the one used to burn your disc)
 
-n1 = -0.014 # number of turns clockwise (fractional and signed) between where one winding radial line (pick one to follow if you use a file with two, usually the thin one if you can make it out) intersects ring 1 and ring 4.
-n2 = -0.002 # number of turns clockwise (fractional and signed) between where one winding radial line (pick one to follow if you use a file with two, usually the thin one if you can make it out) intersects ring 4 and ring 8.
+n1 = -0.014 # number of turns clockwise (fractional and signed) between where one winding radial line (pick one to follow if you use a file with two, usually the thin one if you can make it out) intersects ring 1 and ring 4 (going from the center towards the edge following that line).
+n2 = -0.002 # number of turns clockwise (fractional and signed) between where one winding radial line (pick one to follow if you use a file with two, usually the thin one if you can make it out) intersects ring 4 and ring 8 (going from the center towards the edge following that line).
 ```
 
 Note that if you're using `out-alt-lines-coarse.png`, `out-alt-lines-0.png`, `out-alt-lines-1.png`, `out-alt-lines-2.png` or `out-alt-lines-3.png`, but can't tell if the winding line is clockwise or counter-clockwise, the lines wind clockwise when the thick line is closer to the edge when compared to the thin line next to it and counter-clockwise when the thick line is closer to the center when compared to the thin line next to it.
