@@ -65,10 +65,10 @@ You would start by burning `out-alt-lines-coarse.png` and see a similar pattern 
 </p>
 If the thick line is closer to the inside when compared to the thin line then your guessed tr0 is too low and if the thick lines is closer to the edge when compared to the thin line then your guessed tr0 is too high.
 
-You can adjust your values by trial and error or you can use the solver (see below), note that with the images `out-alt-lines-coarse.png`, `out-alt-lines-0.png`, `out-alt-lines-1.png`, `out-alt-lines-2.png` and `out-alt-lines-3.png` there are no reference rings at 4mm intervals (for clarity reasons) such as with `grad-ref.png` and `out-alt-lines-old.png` so only use those images initially since you actually have to measure distances from the center of the disc for the ring positions the solver expects (28.5 mm for ring 1, 40.5 mm for ring 4 and 56.5 mm for ring 8).
+You can adjust your values by trial and error or you can use the solver (see below), note that with the images `out-alt-lines-coarse.png`, `out-alt-lines-0.png`, `out-alt-lines-1.png`, `out-alt-lines-2.png` and `out-alt-lines-3.png` there are no reference rings at 4mm intervals (for clarity reasons) such as with `grad-ref.png` and `grad-ref-out.png` so only use those images initially since you actually have to measure distances from the center of the disc for the ring positions the solver expects (28.5 mm for ring 1, 40.5 mm for ring 4 and 56.5 mm for ring 8) then use `grad-ref.png` (or `grad-ref-out.png` although it isn't as clear as `grad-ref.png` to read) once you can clearly make out the radial lines.
 
 #### For more examples of expected distortion patterns
-The `calibration/example-distortion-patterns` folder contains simulated patterns for a tr0 that's 30 too low and correct dtr with actual settings being at (23380.0, 1.3899) and the "burn" settings being (23350.0, 1.3899) for the corresponding reference images in the `calibration/images` folder gives the corresponding patterns with `grad-ref.png` and `out-alt-lines-old.png` not being simulated as they would yield unreadable simulation results at these errors.
+The `calibration/example-distortion-patterns` folder contains simulated patterns for a tr0 that's 30 too low and correct dtr with actual settings being at (23380.0, 1.3899) and the "burn" settings being (23350.0, 1.3899) for the corresponding reference images in the `calibration/images` folder gives the corresponding patterns with `grad-ref.png` and `grad-ref-out.png` not being simulated as they would yield unreadable simulation results at these errors.
 
 #### Using the solver
 The `calibration/solver` directory contains a `solver.py` Python script that can be used to create new tr0 and dtr guesses provided measurements of burnt discs with the different radial lines containing images with a guess for the tr0 and dtr values.
@@ -94,11 +94,11 @@ Rinse and repeat until the values converge.
 Here follows a visual method for calibration once a close initial guess has been found (this can be done with [unDEFER]'s defcdparams software or with a preset that yields a close result or the method presented above) using a graph.
 
 #### Step 1: Burn with an inital guess for the parameters
-Burn your disc with one of the following patterns:
+Burn your disc with one of the following patterns (the first one is more readable):
 
 <p align="center">
-    <img src="https://github.com/arduinocelentano/cdimage/blob/main/assets/grad-ref.png" width="200" alt="non alternating lines"/>
-    <img src="https://github.com/arduinocelentano/cdimage/blob/main/assets/grad-ref-alt.png" width="200" alt="alternating lines"/>
+    <img src="https://github.com/arduinocelentano/cdimage/blob/main/calibration/images/grad-ref.png" width="200" alt="non alternating lines"/>
+    <img src="https://github.com/arduinocelentano/cdimage/blob/main/calibration/images/grad-ref-old.png" width="200" alt="alternating lines"/>
 </p>
 
 #### Step 2: Coming up with a refined guess
@@ -108,7 +108,7 @@ Then you set t1 (first track length) and d1 (track delta) to your initial guess,
 
 Then you change the values for t0 (first track length), d0 (track delta) and alpha0 (angle for the start of the line) till the black line overlaps with the line you see on your CD. The black line corresponds to the expected pattern for a disc of actual/real parameters t0 and d0 that is burned with parameters t1 and d1.
 <p align="center">
-    <img src="https://github.com/arduinocelentano/cdimage/blob/main/assets/linedup.png" width="600" alt="screenshot of example usage of the Desmos graph"/>
+    <img src="https://github.com/arduinocelentano/cdimage/blob/main/calibration/docs/linedup.png" width="600" alt="screenshot of example usage of the Desmos graph"/>
 </p>
 
 The values for t0 (first track length) and d0 (track delta) you get are a new guess for the geometry parameters.
