@@ -24,8 +24,11 @@ CreateTrackDialog::CreateTrackDialog(QWidget* parent)
 //todo: implement some database
     m_presets["Verbatim CD-RW Hi-Speed 8x-10x 700 MB SERL 1"] = {22951.52,1.3865961};
     m_presets["Verbatim CD-RW Hi-Speed 8x-10x 700 MB SERL 2"] = {22951.07,1.3865958};
+    m_presets["Verbatim CD-RW Colour HiSpeed 8-12x 700MB SERL"] = {22951.26,1.38659585};
+    m_presets["Verbatim CD-RW DataLifePlus HiSpeed 8x-10x 700MB SERL"] = {22958.498, 1.38655599};
     m_presets["eProformance CD-RW 4x-10x 700 MB Prodisk Technology Inc"] = {22936.085,1.38314};
     m_presets["TDK CD-RW 4x-12x HIGH SPEED 700MB 80MIN"] = {23000.145,1.38659775};
+    m_presets["TDK CD-RW 80HSCB20 High Speed Data CD-RW 700MB 80MIN"] = {22913.5054882195, 1.38761396999654};
     QMapIterator<QString, QVector<double>> i(m_presets);
     while (i.hasNext()) {
         i.next();

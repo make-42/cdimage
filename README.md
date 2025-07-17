@@ -56,8 +56,42 @@ At least for me it was the reason why I finally gave up. However I'd like to sha
 
 If you have other ideas, please share them.
 
-### A visual method for calibration.
-Here follows a visual method for calibration once a close initial guess has been found (this can be done with [unDEFER]'s defcdparams software or with a preset that yields a close result).
+### A start to finish calibration method
+All the calibration images are available in the `calibration/images` directory.
+
+You would start by burning `out-alt-lines-coarse.png` and see a similar pattern to:
+<p align="center">
+    <img src="https://github.com/arduinocelentano/cdimage/blob/main/calibration/example-distortion-patterns/reconstructed-coarse.png" width="200" alt="reconstructed coarse"/>
+</p>
+If the thick line is closer to the inside when compared to the thin line then your guessed tr0 is too low and if the thick lines is closer to the edge when compared to the thin line then your guessed tr0 is too high.
+
+You can adjust your values by trial and error or you can use the solver (see below), note that with the images `out-alt-lines-coarse.png`, `out-alt-lines-0.png`, `out-alt-lines-1.png`, `out-alt-lines-2.png` and `out-alt-lines-3.png` there are no reference rings at 4mm intervals (for clarity reasons) such as with `grad-ref.png` and `out-alt-lines-old.png` so only use those images initially since you actually have to measure distances from the center of the disc for the ring positions the solver expects (28.5 mm for ring 1, 40.5 mm for ring 4 and 56.5 mm for ring 8).
+
+#### For more examples of expected distortion patterns
+The `calibration/example-distortion-patterns` folder contains simulated patterns for a tr0 that's 30 too low and correct dtr with actual settings being at (23380.0, 1.3899) and the "burn" settings being (23350.0, 1.3899) for the corresponding reference images in the `calibration/images` folder gives the corresponding patterns with `grad-ref.png` and `out-alt-lines-old.png` not being simulated as they would yield unreadable simulation results at these errors.
+
+#### Using the solver
+The `calibration/solver` directory contains a `solver.py` Python script that can be used to create new tr0 and dtr guesses provided measurements of burnt discs with the different radial lines containing images with a guess for the tr0 and dtr values.
+
+If you burnt an image with radial lines but no reference rings at 4mm intervals you can measure the distance from the center of the disc and see where the winding lines intersect those distances (28.5 mm for ring 1, 40.5 mm for ring 4 and 56.5 mm for ring 8).
+
+Set these different variables in the solver script with your own values:
+```python
+t1 = 23000.0 # tr0 guess (the one used to burn your disc)
+d1 = 1.385459 # dtr guess (the one used to burn your disc)
+
+n1 = -0.014 # number of turns clockwise (fractional and signed) between where one winding radial line (pick one to follow if you use a file with two, usually the thin one if you can make it out) intersects ring 1 and ring 4.
+n2 = -0.002 # number of turns clockwise (fractional and signed) between where one winding radial line (pick one to follow if you use a file with two, usually the thin one if you can make it out) intersects ring 4 and ring 8.
+```
+
+Note that if you're using `out-alt-lines-coarse.png`, `out-alt-lines-0.png`, `out-alt-lines-1.png`, `out-alt-lines-2.png` or `out-alt-lines-3.png`, but can't tell if the winding line is clockwise or counter-clockwise, the lines wind clockwise when the thick line is closer to the edge when compared to the thin line next to it and counter-clockwise when the thick line is closer to the center when compared to the thin line next to it.
+
+Then run it. It should return new guesses for tr0 and dtr.
+
+Rinse and repeat until the values converge.
+
+### Using the graph
+Here follows a visual method for calibration once a close initial guess has been found (this can be done with [unDEFER]'s defcdparams software or with a preset that yields a close result or the method presented above) using a graph.
 
 #### Step 1: Burn with an inital guess for the parameters
 Burn your disc with one of the following patterns:
