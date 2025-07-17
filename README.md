@@ -57,13 +57,17 @@ At least for me it was the reason why I finally gave up. However I'd like to sha
 If you have other ideas, please share them.
 
 ### A start to finish calibration method
-All the calibration images are available in the `calibration/images` directory.
+All the calibration images are available in the `calibration/images` directory. We will use the abbreviation "tr0" to mean first track length and "dtr" to mean track delta.
 
 You would start by burning `out-alt-lines-coarse.png` and see a similar pattern to:
 <p align="center">
     <img src="https://github.com/arduinocelentano/cdimage/blob/main/calibration/example-distortion-patterns/reconstructed-coarse.png" width="200" alt="reconstructed coarse"/>
 </p>
 If the thick line is closer to the inside when compared to the thin line then your guessed tr0 is too low and if the thick lines is closer to the edge when compared to the thin line then your guessed tr0 is too high.
+
+If the winding gets more and more intense as you get further away from the center then your dtr error is in the same direction as your tr0 error (for example, if tr0 is too high and the winding gets more intense as you get further away from the center then dtr is also too high). If the winding gets less and less intense as you get further away from the center then your dtr error is in the opposite direction as your tr0 error (for example, if tr0 is too high and the winding gets less intense as you get further away from the center then dtr is too low).
+
+The winding can get less intense to the point that it reverses direction.
 
 You can adjust your values by trial and error or you can use the solver (see below), note that with the images `out-alt-lines-coarse.png`, `out-alt-lines-0.png`, `out-alt-lines-1.png`, `out-alt-lines-2.png` and `out-alt-lines-3.png` there are no reference rings at 4mm intervals (for clarity reasons) such as with `grad-ref.png` and `grad-ref-out.png` so only use those images initially since you actually have to measure distances from the center of the disc for the ring positions the solver expects (28.5 mm for ring 1, 40.5 mm for ring 4 and 56.5 mm for ring 8) then use `grad-ref.png` (or `grad-ref-out.png` although it isn't as clear as `grad-ref.png` to read) once you can clearly make out the radial lines.
 
