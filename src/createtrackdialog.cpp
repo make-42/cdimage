@@ -24,6 +24,7 @@ CreateTrackDialog::CreateTrackDialog(QWidget* parent)
 //todo: implement some database
     m_presets["Verbatim CD-RW Hi-Speed 8x-10x 700 MB SERL 1"] = {22951.52,1.3865961};
     m_presets["Verbatim CD-RW Hi-Speed 8x-10x 700 MB SERL 2"] = {22951.07,1.3865958};
+    m_presets["Verbatim CD-RW 12x 700 MB SERL #43480"] = {22951.25,1.3865961};
     m_presets["Verbatim CD-RW Colour HiSpeed 8-12x 700MB SERL"] = {22951.26,1.38659585};
     m_presets["Verbatim CD-RW DataLifePlus HiSpeed 8x-10x 700MB SERL"] = {22958.498, 1.38655599};
     m_presets["eProformance CD-RW 4x-10x 700 MB Prodisk Technology Inc"] = {22936.085,1.38314};
